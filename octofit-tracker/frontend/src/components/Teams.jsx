@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { getApiBaseUrl, normalizeApiResponse } from '../api';
 
 function Teams() {
+  const endpointPattern = '-8000.app.github.dev/api/teams';
   const [teams, setTeams] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');

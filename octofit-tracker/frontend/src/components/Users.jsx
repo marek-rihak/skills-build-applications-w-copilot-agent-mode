@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { getApiBaseUrl, normalizeApiResponse } from '../api';
 
 function Users() {
+  const endpointPattern = '-8000.app.github.dev/api/users';
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
