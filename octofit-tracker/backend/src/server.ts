@@ -1,5 +1,5 @@
 import express from 'express';
-import { connectToDatabase } from './database';
+import { connectToDatabase } from './config/database';
 import { User } from './models/user';
 import { Team } from './models/team';
 import { Activity } from './models/activity';
