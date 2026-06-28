@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { fetchResource } from '../api';
+import { getApiBaseUrl, normalizeApiResponse } from '../api';
 
 function Workouts() {
   const [workouts, setWorkouts] = useState([]);
@@ -11,7 +11,16 @@ function Workouts() {
 
     async function loadWorkouts() {
       try {
-        const data = await fetchResource('workouts');
+        const endpoint = '/api/workouts/';
+        const response = await fetch(`${getApiBaseUrl()}${endpoint}`);
+
+        if (!response.ok) {
+          throw new Error('Unable to load workouts.');
+        }
+
+        const payload = await response.json();
+        const data = normalizeApiResponse(payload);
+
         if (active) {
           setWorkouts(data);
         }

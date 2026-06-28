@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { fetchResource } from '../api';
+import { getApiBaseUrl, normalizeApiResponse } from '../api';
 
 function Users() {
   const [users, setUsers] = useState([]);
@@ -11,7 +11,16 @@ function Users() {
 
     async function loadUsers() {
       try {
-        const data = await fetchResource('users');
+        const endpoint = '/api/users/';
+        const response = await fetch(`${getApiBaseUrl()}${endpoint}`);
+
+        if (!response.ok) {
+          throw new Error('Unable to load users.');
+        }
+
+        const payload = await response.json();
+        const data = normalizeApiResponse(payload);
+
         if (active) {
           setUsers(data);
         }
